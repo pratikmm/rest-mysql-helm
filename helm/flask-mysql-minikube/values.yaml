@@ -1,0 +1,22 @@
+replicaCount: 1
+
+app:
+  name: rest-flask-application
+  image: rest-flask
+  pullPolicy: IfNotPresent
+  tag: "v1"
+
+db:
+  name: mysql
+  image: mysql
+  pullPolicy: IfNotPresent
+  tag: "8.0.22"
+
+appService:
+  type: NodePort
+  port: 8080
+
+PersistentVolume:
+  mysql: 
+    storageName: mysql-persistent-storage
+    pvcName: mysql-pv-claim
