@@ -1,0 +1,8 @@
+dbCreds:
+  name: root-secret
+
+
+PersistentVolume:
+  mysql: 
+    storageName: mysql-persistent-storage
+    pvcName: mysql-pv-claim

@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app.name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.app.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app.name }}
+    spec:
+      containers:
+        - name: {{ .Values.app.name }}
+          image: "{{ .Values.app.image }}:{{ .Values.app.tag }}"
+          imagePullPolicy: {{ .Values.app.pullPolicy }}
+          env:
+            # - name: DB_USERNAME
+            #   valueFrom:
+            #     secretKeyRef:
+            #       name: db-user-secret
+            #       key: username
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: root-secret
+                  key: password
+            # - name: DB_HOST
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       name: db-conf
+            #       key: host
+            # - name: DB_NAME
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       name: db-conf
+            #       key: name
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+             httpGet:
+               path: /test
+               port: 8080
+          readinessProbe:
+             httpGet:
+               path: /test
+               port: 8080
