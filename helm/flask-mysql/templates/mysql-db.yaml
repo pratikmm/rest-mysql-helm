@@ -27,12 +27,33 @@ spec:
       containers:
       - image: "{{ .Values.db.image }}:{{ .Values.db.tag }}"
         name: {{ .Values.db.name }}
+        ports:
+        - containerPort: 3306
+          name: mysql
         env:
           - name: MYSQL_ROOT_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: dev-db-secret
+                name: root-secret
                 key: password
+          # - name: MYSQL_USER
+          #   valueFrom:
+          #     secretKeyRef:
+          #       name: db-user-secret
+          #       key: username
+          # - name: MYSQL_PASSWORD
+          #   valueFrom:
+          #     secretKeyRef:
+          #       name: db-user-secret
+          #       key: password
+          # - name: MYSQL_DATABASE
+          #   valueFrom:
+          #     configMapKeyRef:
+          #       name: db-conf
+          #       key: name
+        livenessProbe:
+          tcpSocket:
+            port: 3306
         ports:
         - containerPort: 3306
           name: {{ .Values.db.name }}

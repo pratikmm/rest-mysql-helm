@@ -2,15 +2,15 @@ replicaCount: 1
 
 app:
   name: rest-flask-application
-  image: rest-flask
+  image: dockerpratik/rest-flask
   pullPolicy: IfNotPresent
-  tag: "v1"
+  tag: "v5"
 
 db:
   name: mysql
   image: mysql
   pullPolicy: IfNotPresent
-  tag: "8.0.22"
+  tag: "5.6"
 
 appService:
   type: NodePort

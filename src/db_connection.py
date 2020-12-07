@@ -14,7 +14,6 @@ class DB_connection:
                                             password=self.password,
                                             host=self.host)
         self.mycursor = self.mydb.cursor()
-        #print('db connection constructor created')
         logging.debug('db connection constructor created')
 
     def execute_query(self, query):
@@ -25,7 +24,6 @@ class DB_connection:
     def clone_db_cursor(self):
         self.mycursor.close()
         self.mydb.close()
-        #print('db_cursor destroyed')
         logging.debug('db_cursor destroyed')
         
         
