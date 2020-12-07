@@ -48,15 +48,15 @@ Please make sure kubernetes environment is up and kubectl client is configured w
 Below steps are for kubernetes environment is created using minikube.
 **Clone the repository**
 ```
-git clone 
+git clone https://github.com/pratikmm/rest-mysql-helm.git
 ```
 **Deploy Secret, PV and PVC using Helm chart**
 ```
-helm install rest-mysql-helm/helm/secret-pvc
+helm install secret-pv rest-mysql-helm/helm/secret-pvc
 ```
 **Deploy REST application and MYSQL DB**
 ```
-helm install rest-mysql-helm/helm/flask-mysql
+helm install rest-w-mysql rest-mysql-helm/helm/flask-mysql
 ```
 **Check if Helm charts are successfully deployed**
 ```
